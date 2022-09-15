@@ -1,0 +1,248 @@
+package com.qa.tests;
+
+import java.io.IOException;
+import java.text.ParseException;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+
+import com.qa.base.TestBase;
+import com.qa.pages.HomePage;
+import com.qa.pages.LogicalDelete;
+import com.qa.pages.LoginPage;
+import com.qa.pages.Reports;
+import com.qa.testdata.CustomListener;
+import com.qa.util.Constants;
+import com.qa.util.ElementUtil;
+
+@Listeners(CustomListener.class)
+public class TST02_LOGICAL_DELETE_TPD extends TestBase {
+	HomePage homePage;
+	LoginPage loginPage;
+	Reports reports;
+	LogicalDelete logicalDelete;
+	
+	public TST02_LOGICAL_DELETE_TPD() {
+		super();
+	}
+	
+	@BeforeClass
+	public void setup() throws EncryptedDocumentException, InvalidFormatException, IOException, InterruptedException {	
+		initialize();
+		loginPage = new LoginPage();
+		homePage = new HomePage();
+		logicalDelete = new LogicalDelete();
+		reports = new Reports();
+		homePage = loginPage.login(readExcelcolumnName("UserName", 15), readExcelcolumnName("Password", 15));
+		System.out.println("Initialization is Successful");
+	}
+	
+	@Test(priority=1)
+	public void TST02_TS1_LOGICAL_DELETE_TPD_Login() throws EncryptedDocumentException, InvalidFormatException, IOException {
+		//System.out.println("Login Successful");
+	}
+	
+	@Test(priority=2)
+	public void TST02_TS2_LOGICAL_DELETE_TPD_createRFD() throws EncryptedDocumentException, InvalidFormatException, IOException, InterruptedException, ParseException {
+		Thread.sleep(5000);
+		reports.navToRFD(15);
+		Thread.sleep(5000);
+		reports.selectLookup(15);
+		Thread.sleep(5000);
+		reports.changeDueDate(0,2,4,15);
+	}
+	
+	@Test(priority=3)
+	public void TST02_TS3_LOGICAL_DELETE_TPD_createTPD() throws EncryptedDocumentException, InvalidFormatException, IOException, InterruptedException {
+		logicalDelete.createTPD(15);
+	}
+	
+	@Test(priority=4)
+	public void TST02_TS4_LOGICAL_DELETE_TPD_navToTPD() throws InvalidFormatException, InterruptedException, IOException {
+		logicalDelete.saveTDPtitle(15, "TPDtitle");
+		logicalDelete.navToTPD();
+		logicalDelete.locateOpenTPD(15, "TPDtitle", "PENDING");
+	}
+	
+	@Test(priority=5)
+	public void TST02_TS5_LOGICAL_DELETE_TPD_SendForLogicalDelete() throws EncryptedDocumentException, InvalidFormatException, IOException, InterruptedException {
+		logicalDelete.sendTPDForLogicalDel(15, "TPDInLogicalDel", logicalDelete.TPDlogicalDelBtn);
+	}
+	
+	@Test(priority=6)
+	public void TST02_TS6_LOGICAL_DELETE_TPD_loginUser2() throws EncryptedDocumentException, InvalidFormatException, InterruptedException, IOException {
+		//Logout current user1
+		reports.logout();
+						
+		loginPage.switchUser();
+					
+		//Login another user2
+		homePage = loginPage.login(readExcelcolumnName("UserName", 17), readExcelcolumnName("Password", 17));
+	}
+	
+	@Test(priority=7)
+	public void TST02_TS7_LOGICAL_DELETE_TPD_navAvailTask() throws EncryptedDocumentException, InvalidFormatException, IOException, InterruptedException {
+		Thread.sleep(5000);
+		logicalDelete.navSelectTPDAvailableTask(15, "TPDInLogicalDel");
+	}
+	
+	@Test(priority=8)
+	public void TST02_TS8_LOGICAL_DELETE_TPD_verifyCompleteLogicalDeleteDate() throws InterruptedException, ParseException {
+		logicalDelete.verifyCompleteLogicalDeleteDate(logicalDelete.creatDateTPD);
+	}
+	
+	@Test(priority=9)
+	public void TST02_TS9_LOGICAL_DELETE_TPD_acceptTask() throws InterruptedException {
+		logicalDelete.acceptAvailableTask();
+	}
+	
+	@Test(priority=10)
+	public void TST02_TS10_LOGICAL_DELETE_TPD_completeTask() throws InterruptedException {
+		//@Param1 => int 0 : select reason "No Longer Needed"
+		//@Param1 => int 1 : select reason "Incorrect Data Entered"
+		//@Param1 => int 2 : select reason "Incorrect Document Provided"
+		//@Param2 => String: description for logical delete
+		logicalDelete.completeDelete(logicalDelete.deleteDescTPD, 0, "Test description for logical delete");
+	}
+	
+	@Test(priority=11)
+	public void TST02_TS11_LOGICAL_DELETE_TPD_verifySubmissionObligations() throws InterruptedException {
+		logicalDelete.verifySubmissionObligations();
+	}
+/////////////////////////////////	
+	
+	@Test(priority=12)
+	public void TST02_TS12_LOGICAL_DELETE_TPD_loginUser1() throws EncryptedDocumentException, InvalidFormatException, InterruptedException, IOException {
+		//Logout current user2
+		reports.logout();
+								
+		loginPage.switchUser();
+							
+		//Login another user1
+		homePage = loginPage.login(readExcelcolumnName("UserName", 15), readExcelcolumnName("Password", 15));
+	}
+	
+	@Test(priority=13)
+	public void TST02_TS13_LOGICAL_DELETE_TPD_ACK_CreateRFD() throws EncryptedDocumentException, InvalidFormatException, IOException, InterruptedException, ParseException {
+		Thread.sleep(5000);
+		reports.navToRFD(15);
+		reports.selectLookup(15);
+		reports.changeDueDate(0,2,4,15);	
+	}
+	@Test(priority=14)
+	public void TST02_TS14_LOGICAL_DELETE_TPD_ACK_createTPD() throws EncryptedDocumentException, InvalidFormatException, IOException, InterruptedException {
+		logicalDelete.createTPD(15);
+	}
+	
+	@Test(priority=15)
+	public void TST02_TS15_LOGICAL_DELETE_TPD_ACK_createRelatedDoc() throws InterruptedException, EncryptedDocumentException, InvalidFormatException, IOException {
+		logicalDelete.createRelatedDoc();
+		//Related document can created
+	}
+
+	@Test(priority=16)
+	public void TST02_TS16_LOGICAL_DELETE_TPD_ACK_startDistribution() throws InterruptedException, InvalidFormatException, IOException {		
+		logicalDelete.startDistribution();
+		logicalDelete.saveTDPtitle(15, "TPDawaitACK");
+	}
+	
+	@Test(priority=17)
+	public void TST02_TS17_LOGICAL_DELETE_TPD_ACK_loginTPUser() throws EncryptedDocumentException, InvalidFormatException, InterruptedException, IOException {
+		//Logout current user1
+		reports.logout();
+								
+		loginPage.switchUser();
+							
+		//Login TP user
+		homePage = loginPage.login(readExcelcolumnName("UserName", 18), readExcelcolumnName("Password", 18));
+	}
+	
+	@Test(priority=18)
+	public void TST02_TS18_LOGICAL_DELETE_TPD_ACK_navToAvailTask() throws EncryptedDocumentException, InvalidFormatException, IOException, InterruptedException {
+		logicalDelete.navSelectTPDackAvailableTask(15, "TPDawaitACK");
+	}
+	
+	@Test(priority=19)
+	public void TST02_TS19_LOGICAL_DELETE_TPD_ACK_acceptTask() throws InterruptedException {
+		logicalDelete.acceptAvailableTask();
+	}
+	
+	@Test(priority=20)
+	public void TST02_TS20_LOGICAL_DELETE_TPD_ACK_acknowledge() throws InterruptedException {
+		logicalDelete.acknowledgeTPDtask();
+	}
+	
+	@Test(priority=21)
+	public void TST02_TS21_LOGICAL_DELETE_TPD_ACK_loginRDuser1() throws EncryptedDocumentException, InvalidFormatException, InterruptedException, IOException {
+		//Logout current
+		reports.logout();
+								
+		loginPage.switchUser();
+							
+		//Login another TP user
+		homePage = loginPage.login(readExcelcolumnName("UserName", 15), readExcelcolumnName("Password", 15));
+	}
+	
+	@Test(priority=22)
+	public void TST02_TS22_LOGICAL_DELETE_TPD_ACK_navToTPD() throws InterruptedException, EncryptedDocumentException, InvalidFormatException, IOException {
+		logicalDelete.navToTPD();
+		logicalDelete.locateOpenTPD(15, "TPDawaitACK", "ACKNOWLEDGED");
+	}
+	
+	@Test(priority=23)
+	public void TST02_TS23_LOGICAL_DELETE_TPD_ACK_sendForLogicalDelete() throws EncryptedDocumentException, InvalidFormatException, IOException, InterruptedException {
+		logicalDelete.sendTPDForLogicalDel(15, "TPDawaitACK", logicalDelete.logicalDelBtn);
+	}
+	
+	@Test(priority=24)
+	public void TST02_TS24_LOGICAL_DELETE_TPD_ACK_loginUser2() throws EncryptedDocumentException, InvalidFormatException, InterruptedException, IOException {
+		//Logout current user1
+		reports.logout();
+						
+		loginPage.switchUser();
+					
+		//Login another user2
+		homePage = loginPage.login(readExcelcolumnName("UserName", 17), readExcelcolumnName("Password", 17));
+	}
+	
+	@Test(priority=25)
+	public void TST02_TS25_LOGICAL_DELETE_TPD_ACK_navAvailTask() throws EncryptedDocumentException, InvalidFormatException, IOException, InterruptedException {
+		logicalDelete.navSelectTPDAvailableTask(15, "TPDawaitACK");
+	}
+	
+	@Test(priority=26)
+	public void TST02_TS26_LOGICAL_DELETE_TPD_ACK_acceptTask() throws InterruptedException {
+		logicalDelete.acceptAvailableTask();
+	}
+	
+	@Test(priority=27)
+	public void TST02_TS27_LOGICAL_DELETE_TPD_ACK_navigateMyTask() throws InterruptedException, EncryptedDocumentException, InvalidFormatException, IOException {
+		logicalDelete.navigateMyTPDtask(15, "TPDawaitACK");
+	}
+	
+	@Test(priority=28)
+	public void TST02_TS28_LOGICAL_DELETE_TPD_ACK_completeTask() throws InterruptedException {
+		//@Param1 => int 0 : select reason "No Longer Needed"
+		//@Param1 => int 1 : select reason "Incorrect Data Entered"
+		//@Param1 => int 2 : select reason "Incorrect Document Provided"
+		//@Param2 => String: description for logical delete
+		logicalDelete.completeDelete(logicalDelete.deleteDescTPD, 0, "Test description for logical delete");
+	}
+	
+	@Test(priority=29)
+	public void TST02_TS29_LOGICAL_DELETE_TPD_ACK_verifySubmissionObligations() throws InterruptedException {
+		logicalDelete.verifySubmissionObligations();
+	}
+	
+	@AfterClass
+	public void tearDown() {
+		driver.quit();
+	}
+	
+}

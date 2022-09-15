@@ -1,0 +1,245 @@
+package com.qa.pages;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.qa.base.TestBase;
+import com.qa.util.Constants;
+import com.qa.util.ElementUtil;
+
+public class HomePage extends TestBase {
+	ElementUtil elementUtil;	
+	@FindBy(xpath = "//a[@id='vaultLogoLink']")
+	WebElement logoHomePage;
+	
+	@FindBy(xpath = "/html/body/div[2]/div[2]/div[1]/div/div/div[1]/div[1]/div/div[2]/ul/div[2]/li[1]/a/span[2]")
+	WebElement homePageAllTasks;
+	
+	@FindBy(xpath = "/html/body/div[2]/div[1]/div/div/div[2]/div/div[2]/a[2]")
+	WebElement lnkAdmin;
+	@FindBy(xpath = "/html/body/div[2]/div[1]/div/div/div[3]/div/div[1]/a[2]")
+	WebElement lnkUsersGroups;
+	
+	@FindBy(css=".CreateObject > .vv_button_text")
+	WebElement btnCreate;
+	
+	
+	By ddList = By.xpath("/html/body/ul[2]");
+	
+	@FindBy(xpath="//div[@id='userMgmtDomainUser']/div[3]/a")
+	WebElement dropDownCreateDomainUser;
+	
+	@FindBy(xpath="//span[contains(.,'Create Domain User')]")
+	WebElement optCreateDomainUser;
+	
+	@FindBy(xpath="//input[@id='firstName']")
+	WebElement txtFirstName;
+	@FindBy(xpath="//input[@id='lastName']")
+	WebElement txtLastName;
+	@FindBy(xpath="//input[@id='username']")
+	WebElement txtNewUserName;
+	@FindBy(xpath="//input[@id='email']")
+	WebElement txtEmail;
+	@FindBy(css=".saveAction > .buttonLabel")
+	WebElement btnSave;								
+	
+	@FindBy(xpath="//form/div/header/div[2]/div[2]/button[3]")
+	WebElement btnCreateUserSave;
+	
+	
+	@FindBy(xpath = "/html/body/div[7]/div[1]")
+	WebElement frmCreeateDomainUser;
+	
+	@FindBy(xpath = "//ul[@class='vv-tabs-list']")
+	WebElement lstDomainUser;
+
+	@FindBy(xpath = "//ul[@class='vv-tabs-list']/li[4]/div/span")
+	WebElement tabDetails;
+	
+	
+	@FindBy(xpath = "/html/body/ul[2]")
+	WebElement ddDomainUser;
+	
+	
+	@FindBy(xpath = "//span[4]/div/div[2]/div/div/div[1]/div/div/input")
+	WebElement txtUserNameVerification;
+	
+
+	
+	@FindBy(className = "vv-input")
+	List<WebElement> txtUserFirstNameVerification;
+	
+	@FindBy(xpath = "//input[@name=\"federated_id__sys\"]")
+	WebElement txtFederated;
+	
+	/*@FindBy(xpath = "//span[2]/div/div/div[2]/div[1]/span[1]/div/div[1]/label")
+	WebElement lblTitle;
+	*/
+	@FindBy(xpath = "//span[@class='vv-vof-detail-header-leading-item vv-vof-detail-header-title']")
+	WebElement lblTitle; // Updated after R2
+	
+	@FindBy(xpath = "//input[contains(@name,'last_name__sys')]")
+	WebElement txtUserLastNameVerification;
+	
+	@FindBy(xpath = "//input[contains(@name,'last_name__sys')]")
+	WebElement txtOrg;
+	
+	@FindBy(xpath = "//span[@class='vv-badge vv-vof-detail-header-status-label']") //updated
+	WebElement lblStaus;
+	/*
+	 * --------------------------------------------------------  Lookup Elements ---------------------------------------------------------------------
+	 */
+	@FindBy(xpath = "//div[contains(@class,'dialog-search-box')]/input")
+	WebElement txtLookupSearchBox;
+	
+	@FindBy(xpath = "//input[@type='radio']")
+	WebElement radioOption;
+	
+	@FindBy(xpath = "//button[contains(text(),'Close')]")
+	WebElement btnCloseWindow;
+	
+	/*@FindBy(xpath = "//button[@class='vv-btn vv-btn-primary'][contains(text(),'Close')]")
+	WebElement btnCloseWindow; //updated after R2
+*/	
+	/*
+	 * ------------------------------------------------------List Elements-----------------------------------------------------------------------------------------
+	 */
+	By list = By.xpath("//ul[@class='vv-tabs-list']");
+	By listOption = By.xpath("li/div/span");
+	By txtUserDocs = By.xpath("//div[@class='vv-input-container vv-input-medium']/input");
+	By leftList = By.xpath("//ul[@class='secondaryNav vv_secondary_nav']");
+	By leftListOption = By.xpath("li/a/span");
+	By lookup = By.xpath("//span[@class='vv-record-select-icon-wrapper'][@title='More search options']");
+	By lable = By.cssSelector(".vv-tabs-tab:nth-child(4) span");
+	
+	//----------------------------------------------------------------------------------------------------------------------------------------------
+	public HomePage() {
+		super();
+		PageFactory.initElements(driver, this);
+		elementUtil = new ElementUtil();
+		//stalePage = new StalePage();
+	}
+	
+	/* Method to retrieve the Home Page title */
+	public String homePageTitle() {
+		elementUtil.waitForElement(homePageAllTasks, Constants.explicitWait);
+		return driver.getTitle();
+	}
+	/* Method to retrieve the Home Page logo verification */
+	public Boolean homePageLogo() {
+		elementUtil.waitForElement(logoHomePage, Constants.explicitWait);
+		return logoHomePage.isDisplayed();
+	}
+	/* Method to retrieve the Home Page title */
+	public Boolean homePageAdminLink() {
+		elementUtil.waitForElement(lnkAdmin, Constants.explicitWait);
+		return lnkAdmin.isDisplayed();
+	}
+	/* Method to clicking User Groups */
+	public void clickUsersGroups() throws InterruptedException {
+		elementUtil.waitForElement(lnkAdmin, Constants.explicitWait);
+		Thread.sleep(3000);
+		elementUtil.doClick(lnkUsersGroups);
+	}
+	/* Method to click the Create User */
+	public void clickCreateUser() {
+		elementUtil.doClick(btnCreate);
+	}
+	/* Method to click the Admin Link */
+	public void clickAdmin() throws InterruptedException {
+		elementUtil.waitForElement(lnkAdmin, Constants.explicitWait);
+		Thread.sleep(3000);
+		elementUtil.doClick(lnkAdmin);
+	}
+	
+	/* Method to select Create User in Admin Page */
+	public void selectDropDownOption() {
+		elementUtil.waitForElement(dropDownCreateDomainUser, Constants.explicitWait);
+		dropDownCreateDomainUser.click();
+		elementUtil.waitForElement(optCreateDomainUser, Constants.explicitWait);
+		//optCreateDomainUser.click();
+		elementUtil.doActionsClick(optCreateDomainUser,Constants.explicitWait);
+		
+
+	}
+	
+	/* Method to Save the User creation form */
+	public boolean saveForm() throws InterruptedException {
+		
+		elementUtil.waitForElement(txtFirstName, Constants.explicitWait);
+		txtFirstName.sendKeys(Constants.testUserFirstName);
+		elementUtil.waitForElement(txtLastName, Constants.explicitWait);
+		txtLastName.sendKeys(elementUtil.dateFormat());
+		elementUtil.waitForElement(txtNewUserName, Constants.explicitWait);
+		System.out.println(Constants.testUserFirstName+elementUtil.dateFormat());
+		txtNewUserName.sendKeys(Constants.testUserFirstName+elementUtil.dateFormat());
+		elementUtil.waitForElement(txtEmail, Constants.explicitWait);
+		txtEmail.sendKeys(Constants.eMail);
+		//elementUtil.waitForElement(btnSave, Constants.explicitWait);
+		//Thread.sleep(5000);
+		elementUtil.doActionsClick(btnSave,Constants.explicitWait);
+		Thread.sleep(5000);
+		elementUtil.waitForElement(lblTitle, Constants.explicitWait);
+		return lblTitle.isDisplayed();
+	}
+	
+	public void userNameValidation(By locator) {
+		driver.manage().timeouts().implicitlyWait(Constants.implicitWait, TimeUnit.SECONDS);
+		elementUtil.waitForElement(lblTitle, Constants.explicitWait);
+		if (lblTitle.isDisplayed() == true) {
+			System.out.println("Label title is appeared");
+		driver.manage().timeouts().implicitlyWait(Constants.implicitWait, TimeUnit.SECONDS);	
+		
+		System.out.println("Label appeared");	
+	    driver.findElement(locator).click();
+		
+		}
+		else
+			System.out.println("Label appeared");		
+	}
+	
+	//****************************************  Method to retreive first name ***************************************************
+	public String getFirstName() {
+		
+		
+		return txtUserFirstNameVerification.get(1).getAttribute("value");
+		
+	}
+	
+	//****************************************  Method to enter data to lookups ***************************************************
+	
+	public void enterDataLookups() throws InterruptedException {
+		
+		System.out.println("Execution entered to this method");
+		Thread.sleep(5000);
+		//selectListOption();
+		elementUtil.selectRightListOption(0,list,listOption);
+		Thread.sleep(2000);
+		elementUtil.selectLookupOptions("ABC Co",0, lookup,txtLookupSearchBox,radioOption,btnCloseWindow);
+		Thread.sleep(2000);
+		elementUtil.selectRightListOption(3,list,listOption);
+		Thread.sleep(2000);
+		elementUtil.selectLookupOptions("G-",6, lookup, txtLookupSearchBox,radioOption,btnCloseWindow);
+		Thread.sleep(2000);
+		elementUtil.selectRightListOption(5,list,listOption);
+		Thread.sleep(2000);
+		elementUtil.enterData("Full User",4,txtUserDocs);
+		Thread.sleep(2000);
+		elementUtil.doClick(btnCreateUserSave);
+		Thread.sleep(5000);
+		
+		//selectLookupOptions();
+	}
+	
+}

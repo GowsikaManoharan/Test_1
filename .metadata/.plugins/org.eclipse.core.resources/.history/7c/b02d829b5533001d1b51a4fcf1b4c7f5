@@ -1,0 +1,12 @@
+package practice;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String s ="Replace whi te s pace ";
+		String str = s.replace(" ", "");
+		System.out.println(str);
+	}
+
+}

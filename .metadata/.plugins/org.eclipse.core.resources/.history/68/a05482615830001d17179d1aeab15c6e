@@ -1,0 +1,31 @@
+package practice;
+
+import java.util.ArrayList;
+
+public class ListPractice {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ArrayList al = new ArrayList();
+		ArrayList<Object> al1 = new ArrayList<Object>();
+		al.add("java");
+		al.add(2.98);
+		al.add("java1");
+		al.add(2);
+		al.add("java2");
+		al.add(2);
+		al.add(6,"String");
+		al.add("Check");
+		System.out.println(al);
+		al.remove(2);
+		al1.add("java");
+		al1.add(2.98);
+		al1.add("java1");
+		al1.add(2);
+		System.out.println(al);
+		al.removeAll(al1);
+		System.out.println(al);
+
+	}
+
+}

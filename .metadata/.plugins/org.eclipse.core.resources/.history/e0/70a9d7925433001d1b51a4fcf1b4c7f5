@@ -1,0 +1,21 @@
+package practice;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String s ="Reverse";
+		String s_dummy="" ;
+		int num= s.length();
+		for(int a = num-1; a>=0;a++)
+		{
+			s_dummy = s_dummy+s.charAt(a);
+		}
+		System.out.println(s);
+		System.out.println(s_dummy);
+		
+		
+
+	}
+
+}

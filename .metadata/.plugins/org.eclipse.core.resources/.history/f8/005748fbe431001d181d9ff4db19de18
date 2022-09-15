@@ -1,0 +1,108 @@
+package practice;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+public class Java_Interview_Programs {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// Fibonacci series
+		int a = 0;
+		int b = 1;
+		int c = 0;
+		for (int i = 0; c < 100; i++) {
+			System.out.print(" " + c);
+			c = b + a;
+			b = a;
+			a = c;
+		}
+		System.out.println();
+		// Prime Number
+		int a1 = 95;
+		int b1 = 0;
+		for (int i = 2; i < 95; i++) {
+			if (a1 % i == 0) {
+				b1++;
+				break;
+			}
+		}
+		if (b1 > 0) {
+			System.out.println("Not a prime number");
+		} else {
+			System.out.println("Prime Number");
+		}
+		// Reverse String and String Palindrome
+		String string = "Mom";
+		String dummy = "";
+		int length = string.length();
+		for (int a2 = length - 1; a2 >= 0; a2--) {
+			dummy = dummy + string.charAt(a2);
+		}
+		System.out.println(dummy);
+		if (string.equalsIgnoreCase(dummy)) {
+			System.out.println("Palindrome");
+		} else {
+			System.out.println("Not a Palindrome");
+		}
+		// Interger Palindrome
+		int temp = 1001;
+		int number = temp;
+		int r, sum = 0;
+		while (temp > 0) {
+			r = temp % 10;
+			sum = (sum * 10) + r;
+			temp = temp / 10;
+		}
+		System.out.println(sum);
+		if (number == sum) {
+			System.out.println("Palindrome");
+		} else {
+			System.out.println("Not a Palindrome");
+		}
+
+		// swap using 3rd variable
+		int temp1 = 100;
+		int temp2 = 1000;
+		int temp3;
+		temp3 = temp1;
+		temp1 = temp2;
+		temp2 = temp3;
+		System.out.println(temp1);
+		System.out.println(temp2);
+		temp1 = temp1 + temp2;
+		temp2 = temp1 - temp2;
+		temp1 = temp1 - temp2;
+		System.out.println(temp1);
+		System.out.println(temp2);
+		
+		//Count of words in a string
+		String sentense = "This this is is work work done";
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		String[] sp = sentense.split(" ");
+		for(int i=0;i<sp.length;i++)
+		{
+			if(map.containsKey(sp[i]))
+			{
+				int count =map.get(sp[i]);
+				map.put(sp[i], count+1);
+			}
+			else
+			{
+				map.put(sp[i], 1);
+			}
+		}
+		System.out.println(map);
+		Set<Entry<String, Integer>> set =map.entrySet();
+		Iterator it =set.iterator();
+		while(it.hasNext())
+		{
+			Map.Entry entry = (Map.Entry)it.next();
+			System.out.println(entry.getKey());
+			System.out.println(entry.getValue());
+		}
+	}
+}

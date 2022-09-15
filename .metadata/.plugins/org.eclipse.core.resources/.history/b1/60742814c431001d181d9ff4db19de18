@@ -1,0 +1,22 @@
+package practice;
+
+public class Java_Interview_Programs {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+//Fibonacci series
+		int a =0;
+		int b=0;
+		int c=0;
+		for(int i=0;c<100;i++)
+		{
+			c=b+a;
+			System.out.println(b);
+			b=a;
+			a=c;
+		}
+				
+
+	}
+
+}
