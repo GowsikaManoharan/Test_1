@@ -284,5 +284,4 @@ INDEX VERSION 1.131+C:\Personal Project\Projects\RestAssured\.metadata\.plugins\
 4083817212.index
 862082857.index
 2004535922.index
-2551112445.index
 1637229204.index
