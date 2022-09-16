@@ -6488,7 +6488,11 @@ not correct please set the HOME environment variable and restart Eclipse. Otherw
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jdt.core 4 4 2022-09-16 10:08:52.821
+=======
+!ENTRY org.eclipse.jdt.core 4 4 2022-09-16 10:19:53.280
+>>>>>>> master
 !MESSAGE Failed to save JDT index: Index for /Collections_Pratice
 !STACK 0
 java.io.IOException: Failed to read index data from file:/C:/Personal%20Project/Projects/RestAssured/.metadata/.plugins/org.eclipse.jdt.core/2551112445.index at offset 765 and size 256930409
@@ -6503,11 +6507,16 @@ java.io.IOException: Failed to read index data from file:/C:/Personal%20Project/
 	at org.eclipse.jdt.internal.core.search.processing.JobManager.run(JobManager.java:422)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 Caused by: java.lang.OutOfMemoryError: Java heap space
+<<<<<<< HEAD
 	at org.eclipse.jdt.internal.compiler.util.HashtableOfObject.<init>(HashtableOfObject.java:57)
 	at org.eclipse.jdt.internal.core.index.DiskIndex.readCategoryTable(DiskIndex.java:681)
 	... 9 more
 
 !ENTRY org.eclipse.jdt.core 4 0 2022-09-16 10:08:52.873
+=======
+
+!ENTRY org.eclipse.jdt.core 4 0 2022-09-16 10:19:53.293
+>>>>>>> master
 !MESSAGE Failed to update qualified index.
 !STACK 0
 java.io.IOException: Failed to read index data from file:/C:/Personal%20Project/Projects/RestAssured/.metadata/.plugins/org.eclipse.jdt.core/1865797976.index at offset 13360 and size -79
@@ -6527,7 +6536,11 @@ Caused by: java.lang.NegativeArraySizeException: Bad attempt to create table wit
 	at org.eclipse.jdt.internal.core.index.DiskIndex.readCategoryTable(DiskIndex.java:681)
 	... 10 more
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jdt.core 4 4 2022-09-16 10:08:55.325
+=======
+!ENTRY org.eclipse.jdt.core 4 4 2022-09-16 10:19:56.077
+>>>>>>> master
 !MESSAGE Failed to update meta index
 !STACK 0
 java.io.IOException: Failed to read index data from file:/C:/Personal%20Project/Projects/RestAssured/.metadata/.plugins/org.eclipse.jdt.core/2551112445.index at offset 765 and size 256930409
@@ -6539,11 +6552,16 @@ java.io.IOException: Failed to read index data from file:/C:/Personal%20Project/
 	at org.eclipse.jdt.internal.core.search.processing.JobManager.run(JobManager.java:441)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 Caused by: java.lang.OutOfMemoryError: Java heap space
+<<<<<<< HEAD
 	at org.eclipse.jdt.internal.compiler.util.HashtableOfObject.<init>(HashtableOfObject.java:57)
 	at org.eclipse.jdt.internal.core.index.DiskIndex.readCategoryTable(DiskIndex.java:681)
 	... 6 more
 
 !ENTRY org.eclipse.jdt.core 4 4 2022-09-16 10:09:17.447
+=======
+
+!ENTRY org.eclipse.jdt.core 4 4 2022-09-16 10:20:01.143
+>>>>>>> master
 !MESSAGE Failed to save JDT index: Index for /Collections_Pratice
 !STACK 0
 java.io.IOException: Failed to read index data from file:/C:/Personal%20Project/Projects/RestAssured/.metadata/.plugins/org.eclipse.jdt.core/2551112445.index at offset 765 and size 256930409
@@ -6559,7 +6577,11 @@ java.io.IOException: Failed to read index data from file:/C:/Personal%20Project/
 	at java.base/java.lang.Thread.run(Thread.java:833)
 Caused by: java.lang.OutOfMemoryError: Java heap space
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jdt.core 4 0 2022-09-16 10:09:17.457
+=======
+!ENTRY org.eclipse.jdt.core 4 0 2022-09-16 10:20:01.155
+>>>>>>> master
 !MESSAGE Failed to update qualified index.
 !STACK 0
 java.io.IOException: Failed to read index data from file:/C:/Personal%20Project/Projects/RestAssured/.metadata/.plugins/org.eclipse.jdt.core/1865797976.index at offset 13360 and size -79
@@ -6579,6 +6601,7 @@ Caused by: java.lang.NegativeArraySizeException: Bad attempt to create table wit
 	at org.eclipse.jdt.internal.core.index.DiskIndex.readCategoryTable(DiskIndex.java:681)
 	... 10 more
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jdt.core 4 4 2022-09-16 10:09:19.912
 !MESSAGE Failed to update meta index
 !STACK 0
@@ -6629,6 +6652,9 @@ Caused by: java.lang.NegativeArraySizeException: Bad attempt to create table wit
 	... 10 more
 
 !ENTRY org.eclipse.jdt.core 4 4 2022-09-16 10:11:02.074
+=======
+!ENTRY org.eclipse.jdt.core 4 4 2022-09-16 10:20:03.613
+>>>>>>> master
 !MESSAGE Failed to update meta index
 !STACK 0
 java.io.IOException: Failed to read index data from file:/C:/Personal%20Project/Projects/RestAssured/.metadata/.plugins/org.eclipse.jdt.core/2551112445.index at offset 765 and size 256930409
